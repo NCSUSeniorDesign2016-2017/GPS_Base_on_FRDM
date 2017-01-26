@@ -1,0 +1,13 @@
+--cpu Cortex-M0+
+".\objects\main.o"
+".\objects\queue.o"
+".\objects\timers.o"
+".\objects\uart.o"
+".\objects\leds.o"
+".\objects\gps.o"
+".\objects\led_frdm-kl25z.o"
+".\objects\startup_mkl25z4.o"
+".\objects\system_mkl25z4.o"
+--ro-base 0x00000000 --entry 0x00000000 --rw-base 0x1FFFF000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\02Project.map" -o .\Objects\02Project.axf
