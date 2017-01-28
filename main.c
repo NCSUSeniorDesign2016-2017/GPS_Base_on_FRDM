@@ -7,9 +7,9 @@
 #include "LEDs.h"
 #include "timers.h"		
 #include "gps.h"
-
-#define RIGHT_ANTENNA_POS		(2)	// on port B
-#define LEFT_ANTENNA_POS		(3)	// on port B
+#include "i2c.h"
+//#include "MMA8451.h"			// accelerometer
+#include "HMC5883L.h"
 
 extern Q_T RxQ, TxQ;
 volatile extern uint8_t message_received;
@@ -26,6 +26,9 @@ int main(void) {
 	Init_UART0(BAUD_RATE);			//communication to terminal
 	Init_UART2(GPS_BAUD_RATE);			//communication with GPS
 	Init_RGB_LEDs();
+	//i2c0_init();											// Port E 24 (SCL) and 25 (SDA)		//accelerometer
+	i2c1_init();
+	init_compass();
 	RxQ.Head++; 
 	printf("Brandon Wiseman bmwisema\r\n");		
 	NVIC_ClearPendingIRQ(UART0_IRQn);
@@ -75,6 +78,7 @@ int main(void) {
 		 else {Control_RGB_LEDs(0,0,0);}
 		 GPS_Message.new = FALSE;
 	 }
+	 read_full_compass();
  }
 } 
 // *******************************ARM University Program Copyright © ARM Ltd 2013************************************* 

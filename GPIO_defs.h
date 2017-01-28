@@ -8,6 +8,9 @@
 
 #define MASK(x) (1UL << (x))
 
+#define RIGHT_ANTENNA_POS		(2)	// on port B
+#define LEFT_ANTENNA_POS		(3)	// on port B
+
 // Speaker output
 #define SPKR_POS (0) 	// on port C
 

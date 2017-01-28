@@ -434,6 +434,31 @@
               <FileType>1</FileType>
               <FilePath>.\gps.c</FilePath>
             </File>
+            <File>
+              <FileName>I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\I2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>MMA8451.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MMA8451.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>HMC5883L.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HMC5883L.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2c1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

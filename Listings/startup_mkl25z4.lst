@@ -608,13 +608,13 @@ ARM Macro Assembler    Page 10
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=.\objects\startup_mkl25z4.d -o.\objects\startup_mkl25z4.o -I"C:\U
-sers\Brandon\Documents\NCSU\Senior Design\02Project\RTE" -I"C:\Users\Brandon\Do
-cuments\NCSU\Senior Design\02Project\RTE\Device\MKL25Z128xxx4" -IC:\Keil_v5\ARM
-\PACK\ARM\CMSIS\4.5.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP
-\1.12.0\Device\Include -IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board --
-predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 521" --predefine=
-"_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SETA 1" --list=.\listings\startup_mkl
-25z4.lst RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
+sers\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE" -I"C:\Users\Bra
+ndon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4" -I
+C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\Ki
+netis_KLxx_DFP\1.12.0\Device\Include -IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\
+7.2.0\Board --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 521
+" --predefine="_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SETA 1" --list=.\listin
+gs\startup_mkl25z4.lst RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s
 
 
 
