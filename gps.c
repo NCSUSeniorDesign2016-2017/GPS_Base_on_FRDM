@@ -34,9 +34,9 @@ void Task_NMEA_Decode(void){
 
 void Task_Report_Drift(void){
 	if(GPS_Message.new){
-		printf("RMC received. Speed over ground is %fkts with a track of %f. Magnetic variation is %f\r",GPS_Message.Speed_over_ground, GPS_Message.Track_angle_true, GPS_Message.Mag_variation);
-		printf("Latitude: %4.3f%c \nLongitude: %5.3f%c \n",GPS_Message.Latitude, GPS_Message.Lat_Hemisphere, GPS_Message.Longitude, GPS_Message.Long_Hemisphere);
-		printf("Heading: %f \n", GPS_Message.Track_angle_true);
+		//printf("\nRMC received. Speed over ground is %fkts with a track of %f. Magnetic variation is %f\r",GPS_Message.Speed_over_ground, GPS_Message.Track_angle_true, GPS_Message.Mag_variation);
+		printf("Lat: %4.3f%c, Long: %5.3f%c, ",GPS_Message.Latitude, GPS_Message.Lat_Hemisphere, GPS_Message.Longitude, GPS_Message.Long_Hemisphere);
+		printf("Heading: %i ", (int) GPS_Message.Track_angle_true);
 	}
 	//GPS_Message.new = FALSE;
 }
@@ -70,8 +70,9 @@ void Decode_HeaderGPS(int index){
 
 
 void Decode_GPS(void){
-	int i = INDEX_DATA_BEGIN;
+	int i = INDEX_DATA_BEGIN, k=0;
 	int comma_count, ready_to_compute = ZERO;
+	int heading_length = 0;
 	while(comma_count<GPS_COMMA_MAX){
 		if(input_message[i] == ASCII_Comma){				
 			comma_count++;															//increment to next data field
@@ -102,7 +103,35 @@ void Decode_GPS(void){
 					break;
 				}
 				case CASE_GPS_HEADING: {		// true directional heading
-					GPS_Message.Track_angle_true = Convert_Number_to_Float(i, TYPE_GPS);
+//					while(input_message[k] != 13)
+//						{
+//							printf("%c", input_message[k]);
+//							k++;
+//						}
+						printf("\n");
+					for(k=i; input_message[k] != ASCII_Comma; k++)
+						{
+							heading_length++;
+						}
+						switch(heading_length){
+							case 4:
+							{
+								GPS_Message.Track_angle_true = Convert_Number_to_Float(i, TYPE_HEADING_ONES);
+								
+								break;
+							}
+							case 5:
+							{
+								GPS_Message.Track_angle_true = Convert_Number_to_Float(i, TYPE_HEADING_TENS);
+								break;
+							}
+							case 6:
+							{
+								GPS_Message.Track_angle_true = Convert_Number_to_Float(i, TYPE_HEADING_HUNDREDS);
+								break;
+							}
+							default: break;
+						}
 					break;
 				}
 				case CASE_GPS_MagVar: { //magnetic variation
@@ -130,7 +159,7 @@ void Decode_GPS(void){
 
 float Convert_Number_to_Float(int index, int type){
 	float new_number = ZERO;
-	int ten_thousands = ZERO, thousands =ZERO, hundreds=ZERO, tens=ZERO, ones = ZERO;
+	float ten_thousands = ZERO, thousands =ZERO, hundreds=ZERO, tens=ZERO, ones = ZERO;
 	float tenths = ZERO, hundredths = ZERO, thousandths = ZERO;
 	if(input_message[index] != ASCII_Comma){		//guard against empty field
 		if(type == TYPE_GPS){
@@ -151,42 +180,72 @@ float Convert_Number_to_Float(int index, int type){
 		}
 		if(type == TYPE_LATITUDE)
 		{
-		thousands = THOUSANDS*(input_message[index] - ASCII_to_Decimal);
-		index++;
-		hundreds = HUNDREDS*(input_message[index] - ASCII_to_Decimal);		
-		index++;
-		tens = TENS*(input_message[index] - ASCII_to_Decimal);
-		index++;
-		ones = input_message[index]-ASCII_to_Decimal;
-		index+=ADVANCE_PAST_DECIMAL;		//move past decimal
-		tenths = (float) (input_message[index] - ASCII_to_Decimal)/ TENS;
-		index++;
-		hundredths = (float) (input_message[index]- ASCII_to_Decimal) / HUNDREDS;
-		index++;
-		thousandths = (float) (input_message[index] - ASCII_to_Decimal) / THOUSANDS;
-		new_number = thousands + hundreds + tens + ones + tenths + hundredths + thousandths;
+			thousands = THOUSANDS*(input_message[index] - ASCII_to_Decimal);
+			index++;
+			hundreds = HUNDREDS*(input_message[index] - ASCII_to_Decimal);		
+			index++;
+			tens = TENS*(input_message[index] - ASCII_to_Decimal);
+			index++;
+			ones = input_message[index]-ASCII_to_Decimal;
+			index+=ADVANCE_PAST_DECIMAL;		//move past decimal
+			tenths = (float) (input_message[index] - ASCII_to_Decimal)/ TENS;
+			index++;
+			hundredths = (float) (input_message[index]- ASCII_to_Decimal) / HUNDREDS;
+			index++;
+			thousandths = (float) (input_message[index] - ASCII_to_Decimal) / THOUSANDS;
+			new_number = thousands + hundreds + tens + ones + tenths + hundredths + thousandths;
 		}
 		if(type == TYPE_LONGITUDE)
 		{
-		ten_thousands = TEN_THOUSANDS*(input_message[index] - ASCII_to_Decimal);
-		index++;
-		thousands = THOUSANDS*(input_message[index] - ASCII_to_Decimal);
-		index++;
-		hundreds = HUNDREDS*(input_message[index] - ASCII_to_Decimal);
-		index++;
-		tens = TENS*(input_message[index] - ASCII_to_Decimal);		
-		index++;
-		ones = (input_message[index] - ASCII_to_Decimal);
-		index+=ADVANCE_PAST_DECIMAL; //move past decimal
-		tenths = (float) (input_message[index]-ASCII_to_Decimal)/TENS;
-		index++;	
-		hundredths = (float) (input_message[index] - ASCII_to_Decimal)/ HUNDREDS;
-		index++;
-		thousandths = (float) (input_message[index] - ASCII_to_Decimal)/THOUSANDS;
-		new_number = thousands + hundreds + tens + ones + tenths + hundredths + thousandths;
+			ten_thousands = TEN_THOUSANDS*(input_message[index] - ASCII_to_Decimal);
+			index++;
+			thousands = THOUSANDS*(input_message[index] - ASCII_to_Decimal);
+			index++;
+			hundreds = HUNDREDS*(input_message[index] - ASCII_to_Decimal);
+			index++;
+			tens = TENS*(input_message[index] - ASCII_to_Decimal);		
+			index++;
+			ones = (input_message[index] - ASCII_to_Decimal);
+			index+=ADVANCE_PAST_DECIMAL; //move past decimal
+			tenths = (float) (input_message[index]-ASCII_to_Decimal)/TENS;
+			index++;	
+			hundredths = (float) (input_message[index] - ASCII_to_Decimal)/ HUNDREDS;
+			index++;
+			thousandths = (float) (input_message[index] - ASCII_to_Decimal)/THOUSANDS;
+			new_number = thousands + hundreds + tens + ones + tenths + hundredths + thousandths;
+		}
+		if(type == TYPE_HEADING_HUNDREDS){
+			hundreds = HUNDREDS*(input_message[index] - ASCII_to_Decimal);		//convert to hundreds decimal
+			index++;
+			tens = TENS*(input_message[index] - ASCII_to_Decimal);
+			index++;
+			ones = input_message[index]-ASCII_to_Decimal;
+			index+=ADVANCE_PAST_DECIMAL;		//move past decimal
+			tenths = (float) (input_message[index] - ASCII_to_Decimal)/ TENS;
+			index++;
+			hundredths = (float) (input_message[index] - ASCII_to_Decimal)/HUNDREDS;
+			new_number = hundreds + tens + ones + tenths + hundredths;
+		}
+		if(type == TYPE_HEADING_TENS){
+			tens = TENS*(input_message[index] - ASCII_to_Decimal);
+			index++;
+			ones = input_message[index]-ASCII_to_Decimal;
+			index+=ADVANCE_PAST_DECIMAL;		//move past decimal
+			tenths = (float) (input_message[index] - ASCII_to_Decimal)/ TENS;
+			index++;
+			hundredths = (float) (input_message[index] - ASCII_to_Decimal)/HUNDREDS;
+			new_number = tens + ones + tenths + hundredths;
+		}
+		if(type == TYPE_HEADING_ONES){
+			ones = input_message[index]-ASCII_to_Decimal;
+			index+=ADVANCE_PAST_DECIMAL;		//move past decimal
+			tenths = (float) (input_message[index] - ASCII_to_Decimal)/ TENS;
+			index++;
+			hundredths = (float) (input_message[index] - ASCII_to_Decimal)/HUNDREDS;
+			new_number = ones + tenths + hundredths;
 		}
 	}
-	return new_number;
+return new_number;
 }
 
 int checksum(void) {

@@ -11,3 +11,6 @@
 .\objects\hmc5883l.o: delay.h
 .\objects\hmc5883l.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\hmc5883l.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\hmc5883l.o: GPS.h
+.\objects\hmc5883l.o: GPIO_defs.h
+.\objects\hmc5883l.o: LEDs.h

@@ -23,14 +23,14 @@ extern struct GPS_Message GPS_Message;
 int main(void) { 
 	int i, index= ZERO;
 	uint8_t copy_message = FALSE;
-	Init_UART0(BAUD_RATE);			//communication to terminal
-	Init_UART2(GPS_BAUD_RATE);			//communication with GPS
+	Init_UART0(BAUD_RATE);							//communication to terminal (backdoor through open SDA)
+	Init_UART2(GPS_BAUD_RATE);					//communication with GPS
 	Init_RGB_LEDs();
 	//i2c0_init();											// Port E 24 (SCL) and 25 (SDA)		//accelerometer
 	i2c1_init();
 	init_compass();
 	RxQ.Head++; 
-	printf("Brandon Wiseman bmwisema\r\n");		
+	printf("United States Air Force\r\n");		
 	NVIC_ClearPendingIRQ(UART0_IRQn);
 	NVIC_EnableIRQ(UART0_IRQn); 
 	
@@ -44,7 +44,6 @@ int main(void) {
 	
  while (TRUE) {
 		if(GPS_message_received){	
-				//Control_RGB_LEDs(0,1,0);			// flash green when GPS received
 		 for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
 			 if(RxQ.Data[i] == ASCII_$){
 				 copy_message = TRUE;
@@ -61,19 +60,20 @@ int main(void) {
 		 copy_message = FALSE;
 		 index=ZERO;
 		 Task_NMEA_Decode();
-		 //Control_RGB_LEDs(0,0,0);		// turn off LED after sending message
 	 }
-		Task_Report_Drift();		//report latitude and longitude
+		//Task_Report_Drift();		//report latitude and longitude
 	 if(GPS_Message.new){
-		 if(GPS_Message.Track_angle_true > 225 && GPS_Message.Track_angle_true < 315){
+		 if(GPS_Message.Track_angle_true >=0 && GPS_Message.Track_angle_true <= 180){
 				Control_RGB_LEDs(0,1,0);	// GREEN
 				PTB->PSOR = MASK(RIGHT_ANTENNA_POS);		// right_antenna off
 				PTB->PCOR	=	MASK(LEFT_ANTENNA_POS);			// LEFT_ANTENNA on
+				printf("LEFT\n");
 		 }
-		 else if(GPS_Message.Track_angle_true > 315 && GPS_Message.Track_angle_true < 360){
+		 else if(GPS_Message.Track_angle_true > 180 && GPS_Message.Track_angle_true <= 360){
 			 Control_RGB_LEDs(1,0,0);		// RED
 			 PTB->PSOR	=	MASK(LEFT_ANTENNA_POS);		// LEFT_ANTENNA off
 			 PTB->PCOR	=	MASK(RIGHT_ANTENNA_POS);	// right antenna on
+			 printf("RIGHT\n");
 		 }
 		 else {Control_RGB_LEDs(0,0,0);}
 		 GPS_Message.new = FALSE;
