@@ -38,7 +38,7 @@ void Task_Report_Drift(void){
 		printf("Lat: %4.3f%c, Long: %5.3f%c, ",GPS_Message.Latitude, GPS_Message.Lat_Hemisphere, GPS_Message.Longitude, GPS_Message.Long_Hemisphere);
 		printf("Heading: %i ", (int) GPS_Message.Track_angle_true);
 	}
-	//GPS_Message.new = FALSE;
+	GPS_Message.new = FALSE;
 }
 
 void Decode_HeaderGPS(int index){

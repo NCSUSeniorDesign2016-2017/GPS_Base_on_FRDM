@@ -20,6 +20,10 @@ void Init_UART0(uint32_t baud_rate);
 void UART0_Transmit_Poll(uint8_t);
 uint8_t UART0_Receive_Poll(void);
 
+void Init_UART1(uint32_t baud_rate);
+void UART1_Transmit_Poll(uint8_t);
+uint8_t UART1_Receive_Poll(void);
+
 void Init_UART2(uint32_t baud_rate);
 void UART2_Transmit_Poll(uint8_t data);
 uint8_t UART2_Receive_Poll(void);

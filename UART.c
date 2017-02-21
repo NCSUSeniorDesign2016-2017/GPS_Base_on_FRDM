@@ -3,8 +3,9 @@
 
 volatile uint8_t message_received = FALSE;
 volatile uint8_t GPS_message_received = FALSE;
+volatile uint8_t iot_message_received = FALSE;
 
-Q_T TxQ, RxQ;
+Q_T TxQ, RxQ, WTxQ, WRxQ;
 
 /* BEGIN - UART0 Device Driver
 
@@ -133,6 +134,95 @@ void UART0_IRQHandler(void) {
                 UART_S1_FE_MASK | UART_S1_PF_MASK;
             
         }
+}
+
+void Init_UART1(uint32_t baud_rate) {				// to GPS
+    uint32_t divisor;
+    
+    // enable clock to UART and Port C
+    SIM->SCGC4 |= SIM_SCGC4_UART1_MASK;
+    SIM->SCGC5 |= SIM_SCGC5_PORTC_MASK;
+
+
+    // select UART pins										//UPDATE THIS TO ACTUAL PINS
+    PORTC->PCR[3] = PORT_PCR_MUX(3); // Rx
+    PORTC->PCR[4] = PORT_PCR_MUX(3); // Tx
+    
+    UART1->C2 &=  ~(UARTLP_C2_TE_MASK | UARTLP_C2_RE_MASK);
+        
+    // Set baud rate to 15200 baud
+    divisor = BUS_CLOCK/(baud_rate*16);
+    UART1->BDH = UART_BDH_SBR(divisor>>8);
+    UART1->BDL = UART_BDL_SBR(divisor);
+    
+    // No parity, 8 bits, two stop bits, other settings;
+    UART1->C1 = 0; 
+    UART1->S2 = 0;
+    UART1->C3 = 0;
+    
+// Enable transmitter and receiver but not interrupts
+    UART1->C2 = UART_C2_TE_MASK | UART_C2_RE_MASK;
+    
+#if USE_UART_INTERRUPTS
+    NVIC_SetPriority(UART1_IRQn, 2); // 0, 1, 2, or 3
+    NVIC_ClearPendingIRQ(UART1_IRQn); 
+    NVIC_EnableIRQ(UART1_IRQn);
+
+    UART1->C2 |= UART_C2_TIE_MASK | UART_C2_RIE_MASK;
+    //    UART2->C2 |= UART_C2_RIE_MASK;
+    Q_Init(&TxQ);
+    Q_Init(&RxQ);
+#endif
+
+}
+
+void UART1_IRQHandler(void) {
+	char temp;
+    NVIC_ClearPendingIRQ(UART2_IRQn);
+    if (UART1->S1 & UART_S1_TDRE_MASK) {
+        // can send another character
+        if (!Q_Empty(&WTxQ)) {
+            UART1->D = Q_Dequeue(&WTxQ);
+        } else {
+            // queue is empty so disable transmitter
+            UART1->C2 &= ~UART_C2_TIE_MASK;
+        }
+    }
+    if (UART1->S1 & UART_S1_RDRF_MASK) {
+        // received a character
+        if (!Q_Full(&WRxQ)) {
+						temp = UART1->D;
+            Q_Enqueue(&WRxQ, temp);
+					if(temp == 13) {	//if Carriage Return
+						iot_message_received = TRUE;
+					}
+        } else {
+            // error - queue full.
+            while (TRUE)
+                ;
+        }
+    }
+    if (UART1->S1 & (UART_S1_OR_MASK |UART_S1_NF_MASK | 
+        UART_S1_FE_MASK | UART_S1_PF_MASK)) {
+            // handle the error
+            // clear the flag
+            /*
+            UART1->S1 = UART_S1_OR_MASK | UART_S1_NF_MASK | 
+                UART_S1_FE_MASK | UART_S1_PF_MASK;
+            */
+        }
+}
+
+void UART1_Transmit_Poll(uint8_t data) {
+    while (!(UART1->S1 & UART_S1_TDRE_MASK))
+        ;
+    UART1->D = data;
+}    
+
+uint8_t UART1_Receive_Poll(void) {
+    while (!(UART1->S1 & UART_S1_RDRF_MASK))
+        ;
+    return UART1->D;
 }
 
 void Init_UART2(uint32_t baud_rate) {				// to GPS
