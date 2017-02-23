@@ -53,7 +53,7 @@ int main(void) {
 	PTB->PDDR &= ~MASK(8);
 	
 	PTB->PCOR	=	MASK(RIGHT_ANTENNA_POS);	// right antenna on
-	Control_RGB_LEDs(0,0,0);
+	Control_RGB_LEDs(1,1,1);
 while (TRUE) {
 		if(message_received) {
 			for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
