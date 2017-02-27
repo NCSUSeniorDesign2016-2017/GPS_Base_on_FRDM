@@ -10,6 +10,7 @@
 ".\objects\delay.o"
 ".\objects\hmc5883l.o"
 ".\objects\i2c1.o"
+".\objects\iot.o"
 ".\objects\led_frdm-kl25z.o"
 ".\objects\startup_mkl25z4.o"
 ".\objects\system_mkl25z4.o"

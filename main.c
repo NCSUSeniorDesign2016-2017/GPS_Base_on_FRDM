@@ -10,6 +10,7 @@
 #include "i2c.h"
 //#include "MMA8451.h"			// accelerometer
 #include "HMC5883L.h"
+#include "iot.h"
 
 extern Q_T RxQ, TxQ;
 volatile extern uint8_t message_received;
@@ -53,6 +54,7 @@ int main(void) {
 	PTB->PDDR &= ~MASK(8);
 	
 	PTB->PCOR	=	MASK(RIGHT_ANTENNA_POS);	// right antenna on
+	//Init_iot();
 	Control_RGB_LEDs(1,1,1);
 while (TRUE) {
 		if(message_received) {
@@ -71,21 +73,21 @@ while (TRUE) {
 			message_received = FALSE;
 			terminal_index=ZERO;
 		}
-		if(iot_message_received) {
-			for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
-				iot_message[iot_index] = RxQ.Data[i]; 	//copy que to array
-				iot_index++;
-				RxQ.Data[i] = ZERO;			//empty que
-			} 
-			//Send_String(terminal_message);					// debugging function
-			printf(iot_message);
-			for(k=ZERO; k<i; k++){
-				iot_message[k] = ZERO;
-			}	
-			Q_Init(&RxQ);
-			iot_message_received = FALSE;
-			iot_index=ZERO;
-		}
+//		if(iot_message_received) {
+//			for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
+//				iot_message[iot_index] = RxQ.Data[i]; 	//copy que to array
+//				iot_index++;
+//				RxQ.Data[i] = ZERO;			//empty que
+//			} 
+//			//Send_String(terminal_message);					// debugging function
+//			printf(iot_message);
+//			for(k=ZERO; k<i; k++){
+//				iot_message[k] = ZERO;
+//			}	
+//			Q_Init(&RxQ);
+//			iot_message_received = FALSE;
+//			iot_index=ZERO;
+//		}
 		if(GPS_message_received){	
 		 for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
 			 if(RxQ.Data[i] == ASCII_$){

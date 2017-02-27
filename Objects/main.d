@@ -17,3 +17,4 @@
 .\objects\main.o: gps.h
 .\objects\main.o: i2c.h
 .\objects\main.o: HMC5883L.h
+.\objects\main.o: iot.h

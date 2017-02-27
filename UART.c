@@ -136,7 +136,7 @@ void UART0_IRQHandler(void) {
         }
 }
 
-void Init_UART1(uint32_t baud_rate) {				// to GPS
+void Init_UART1(uint32_t baud_rate) {				// to IoT
     uint32_t divisor;
     
     // enable clock to UART and Port C

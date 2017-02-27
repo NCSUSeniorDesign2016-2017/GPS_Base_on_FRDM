@@ -459,6 +459,11 @@
               <FileType>1</FileType>
               <FilePath>.\i2c1.c</FilePath>
             </File>
+            <File>
+              <FileName>iot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\iot.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
