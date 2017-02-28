@@ -29,7 +29,7 @@ int main(void) {
 	int i, k, index= ZERO, terminal_index = ZERO, iot_index = ZERO;
 	uint8_t copy_message = FALSE;
 	Init_UART0(BAUD_RATE);							//communication to terminal (backdoor through open SDA)
-	//Init_UART1(BAUD_RATE);						//communication to IoT device
+	Init_UART1(9600);							//communication to IoT device
 	Init_UART2(GPS_BAUD_RATE);					//communication with GPS
 	Init_RGB_LEDs();
 	//i2c0_init();											// Port E 24 (SCL) and 25 (SDA)		//accelerometer
@@ -48,14 +48,14 @@ int main(void) {
 	PORTB->PCR[LEFT_ANTENNA_POS] |= PORT_PCR_MUX(1);
 	PTB->PDDR |= MASK(RIGHT_ANTENNA_POS) | MASK(LEFT_ANTENNA_POS);					// set to outputs
 	
-	PORTB->PCR[8] &=	~PORT_PCR_MUX_MASK;
+	PORTB->PCR[8] &=	~PORT_PCR_MUX_MASK;							// for input switch testing
 	PORTB->PCR[8] |=	PORT_PCR_MUX(1);
 	PORTB_PCR8 	|= 	0x03;															// pull up resistor
 	PTB->PDDR &= ~MASK(8);
 	
 	PTB->PCOR	=	MASK(RIGHT_ANTENNA_POS);	// right antenna on
-	//Init_iot();
-	Control_RGB_LEDs(1,1,1);
+	Init_iot();
+	Control_RGB_LEDs(0,0,1);
 while (TRUE) {
 		if(message_received) {
 			for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
@@ -65,29 +65,28 @@ while (TRUE) {
 			} 
 			//Send_String(terminal_message);					// debugging function
 			printf(terminal_message);
-		  
-			for(k=ZERO; k<i; k++){
+		  Send_to_IOT(terminal_message);		// TRY THIS
+			for(k=ZERO; k<=Q_SIZE; k++){
 				terminal_message[k] = ZERO;
 			}	
 			Q_Init(&RxQ);
 			message_received = FALSE;
 			terminal_index=ZERO;
 		}
-//		if(iot_message_received) {
-//			for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
-//				iot_message[iot_index] = RxQ.Data[i]; 	//copy que to array
-//				iot_index++;
-//				RxQ.Data[i] = ZERO;			//empty que
-//			} 
-//			//Send_String(terminal_message);					// debugging function
-//			printf(iot_message);
-//			for(k=ZERO; k<i; k++){
-//				iot_message[k] = ZERO;
-//			}	
-//			Q_Init(&RxQ);
-//			iot_message_received = FALSE;
-//			iot_index=ZERO;
-//		}
+		if(iot_message_received) {
+			for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
+				iot_message[iot_index] = RxQ.Data[i]; 	//copy que to array
+				iot_index++;
+				RxQ.Data[i] = ZERO;			//empty que
+			} 
+			printf(iot_message);
+			for(k=ZERO; k<i; k++){
+				iot_message[k] = ZERO;
+			}	
+			Q_Init(&RxQ);
+			iot_message_received = FALSE;
+			iot_index=ZERO;
+		}
 		if(GPS_message_received){	
 		 for(i=ZERO; i<Get_Num_Rx_Chars_Available(); i++){
 			 if(RxQ.Data[i] == ASCII_$){

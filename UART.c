@@ -5,7 +5,7 @@ volatile uint8_t message_received = FALSE;
 volatile uint8_t GPS_message_received = FALSE;
 volatile uint8_t iot_message_received = FALSE;
 
-Q_T TxQ, RxQ, WTxQ, WRxQ;
+Q_T TxQ, RxQ;
 
 /* BEGIN - UART0 Device Driver
 
@@ -115,6 +115,7 @@ void UART0_IRQHandler(void) {
         if (!Q_Full(&RxQ)) {											// if queue not full
 						temp = UART0->D;
             Q_Enqueue(&RxQ, temp);
+						UART1->D = temp;
 					if(temp == 13){													//if CR
 						message_received = TRUE;
 					}
@@ -150,7 +151,7 @@ void Init_UART1(uint32_t baud_rate) {				// to IoT
     
     UART1->C2 &=  ~(UARTLP_C2_TE_MASK | UARTLP_C2_RE_MASK);
         
-    // Set baud rate to 15200 baud
+    // Set baud rate to 115200 baud
     divisor = BUS_CLOCK/(baud_rate*16);
     UART1->BDH = UART_BDH_SBR(divisor>>8);
     UART1->BDL = UART_BDL_SBR(divisor);
@@ -178,11 +179,13 @@ void Init_UART1(uint32_t baud_rate) {				// to IoT
 
 void UART1_IRQHandler(void) {
 	char temp;
+//	char test_print[20];
+//	int i =0;
     NVIC_ClearPendingIRQ(UART2_IRQn);
     if (UART1->S1 & UART_S1_TDRE_MASK) {
         // can send another character
-        if (!Q_Empty(&WTxQ)) {
-            UART1->D = Q_Dequeue(&WTxQ);
+        if (!Q_Empty(&TxQ)) {
+            UART1->D = Q_Dequeue(&TxQ);
         } else {
             // queue is empty so disable transmitter
             UART1->C2 &= ~UART_C2_TIE_MASK;
@@ -190,12 +193,15 @@ void UART1_IRQHandler(void) {
     }
     if (UART1->S1 & UART_S1_RDRF_MASK) {
         // received a character
-        if (!Q_Full(&WRxQ)) {
+        if (!Q_Full(&RxQ)) {
 						temp = UART1->D;
-            Q_Enqueue(&WRxQ, temp);
+//						test_print[i] = temp;
+//						i++;
+            Q_Enqueue(&RxQ, temp);
 					if(temp == 13) {	//if Carriage Return
 						iot_message_received = TRUE;
 					}
+//						printf(test_print);
         } else {
             // error - queue full.
             while (TRUE)
@@ -326,6 +332,21 @@ void Send_String(uint8_t * str) {
     if (!(UART0->C2 & UART_C2_TIE_MASK)) {
         UART0->C2 |= UART_C2_TIE_MASK;
         UART0->D = Q_Dequeue(&TxQ); 
+    }
+}
+
+void Send_to_IOT(uint8_t * str) {
+    // enqueue string
+    while (*str != '\0') { // copy characters up to null terminator
+        while (Q_Full(&TxQ))
+            ; // wait for space to open up
+        Q_Enqueue(&TxQ, *str);
+        str++;
+    }
+    // start transmitter if it isn't already running
+    if (!(UART1->C2 & UART_C2_TIE_MASK)) {
+        UART1->C2 |= UART_C2_TIE_MASK;
+        UART1->D = Q_Dequeue(&TxQ); 
     }
 }
 
