@@ -1,5 +1,5 @@
 Dependencies for Project '02Project', Target 'Target 1': (DO NOT MODIFY !)
-F (.\main.c)(0x58B5B432)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x58D7F9FC)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include\MKL25Z4.H)(0x5644C55A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x574EE6E6)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h)(0x56265FCC)
@@ -10,7 +10,7 @@ I (C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x574EE6E6)
 I (gpio_defs.h)(0x588C4EEE)
 I (UART.h)(0x58B49DA3)
-I (queue.h)(0x580CF4A2)
+I (queue.h)(0x58B5C7D4)
 I (LEDs.h)(0x580CF4B0)
 I (timers.h)(0x5824CC90)
 I (gps.h)(0x588CC7DC)
@@ -18,7 +18,7 @@ I (i2c.h)(0x588C418D)
 I (HMC5883L.h)(0x588C4CFB)
 I (iot.h)(0x58B4A521)
 F (.\queue.c)(0x580F8C8C)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\queue.o --omf_browse .\objects\queue.crf --depend .\objects\queue.d)
-I (queue.h)(0x580CF4A2)
+I (queue.h)(0x58B5C7D4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x574EE6E6)
 F (.\timers.c)(0x5824CCB0)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\timers.o --omf_browse .\objects\timers.crf --depend .\objects\timers.d)
 I (timers.h)(0x5824CC90)
@@ -29,7 +29,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x56264C10)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x56264C10)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56264C10)
 I (C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x57DFF5F7)
-F (.\UART.c)(0x58B58BE8)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
+F (.\UART.c)(0x58C1952D)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
 I (UART.h)(0x58B49DA3)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x574EE6E6)
 I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include\MKL25Z4.H)(0x5644C55A)
@@ -38,7 +38,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x56264C10)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x56264C10)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56264C10)
 I (C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x57DFF5F7)
-I (queue.h)(0x580CF4A2)
+I (queue.h)(0x58B5C7D4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x574EE6E6)
 F (.\LEDs.c)(0x580A9D3E)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\leds.o --omf_browse .\objects\leds.crf --depend .\objects\leds.d)
 I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include\MKL25Z4.H)(0x5644C55A)
@@ -50,14 +50,14 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56264C10)
 I (C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x57DFF5F7)
 I (LEDs.h)(0x580CF4B0)
 I (gpio_defs.h)(0x588C4EEE)
-F (.\queue.h)(0x580CF4A2)()
+F (.\queue.h)(0x58B5C7D4)()
 F (.\timers.h)(0x5824CC90)()
 F (.\LEDs.h)(0x580CF4B0)()
 F (.\GPIO_defs.h)(0x588C4EEE)()
 F (.\UART.h)(0x58B49DA3)()
 F (.\gps.c)(0x58B4A594)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\gps.o --omf_browse .\objects\gps.crf --depend .\objects\gps.d)
 I (gps.h)(0x588CC7DC)
-I (queue.h)(0x580CF4A2)
+I (queue.h)(0x58B5C7D4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x574EE6E6)
 I (UART.h)(0x58B49DA3)
 I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include\MKL25Z4.H)(0x5644C55A)
@@ -132,7 +132,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x56264C10)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56264C10)
 I (C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x57DFF5F7)
 I (UART.h)(0x58B49DA3)
-I (queue.h)(0x580CF4A2)
+I (queue.h)(0x58B5C7D4)
 I (LEDs.h)(0x580CF4B0)
 I (GPIO_defs.h)(0x588C4EEE)
 I (iot.h)(0x58B4A521)
@@ -145,7 +145,7 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x56264C10)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56264C10)
 I (C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x57DFF5F7)
 I (C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board\Board_LED.h)(0x53BBCB12)
-F (RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s)(0x58102FC5)(--cpu Cortex-M0+ --pd "__EVAL SETA 1" -g --apcs=interwork -I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board--pd "__UVISION_VERSION SETA 521" --pd "_RTE_ SETA 1" --pd "MKL25Z128xxx4 SETA 1"--list .\listings\startup_mkl25z4.lst --xref -o .\objects\startup_mkl25z4.o --depend .\objects\startup_mkl25z4.d)
+F (RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s)(0x58B5C7CB)(--cpu Cortex-M0+ --pd "__EVAL SETA 1" -g --apcs=interwork -I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board--pd "__UVISION_VERSION SETA 521" --pd "_RTE_ SETA 1" --pd "MKL25Z128xxx4 SETA 1"--list .\listings\startup_mkl25z4.lst --xref -o .\objects\startup_mkl25z4.o --depend .\objects\startup_mkl25z4.d)
 F (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.c)(0x5644C55A)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE"-I"C:\Users\Brandon\Documents\NCSU\Senior Design\GPS_Base_on_FRDM\RTE\Device\MKL25Z128xxx4"-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.2.0\Board-D__UVISION_VERSION="521" -D_RTE_ -DMKL25Z128xxx4-o .\objects\system_mkl25z4.o --omf_browse .\objects\system_mkl25z4.crf --depend .\objects\system_mkl25z4.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x574EE6E6)
 I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.12.0\Device\Include\MKL25Z4.h)(0x5644C55A)

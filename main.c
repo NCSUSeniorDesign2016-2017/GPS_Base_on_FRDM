@@ -29,7 +29,7 @@ int main(void) {
 	int i, k, index= ZERO, terminal_index = ZERO, iot_index = ZERO;
 	uint8_t copy_message = FALSE;
 	Init_UART0(BAUD_RATE);							//communication to terminal (backdoor through open SDA)
-	Init_UART1(9600);							//communication to IoT device
+	Init_UART1(115200);							//communication to IoT device
 	Init_UART2(GPS_BAUD_RATE);					//communication with GPS
 	Init_RGB_LEDs();
 	//i2c0_init();											// Port E 24 (SCL) and 25 (SDA)		//accelerometer
@@ -65,7 +65,7 @@ while (TRUE) {
 			} 
 			//Send_String(terminal_message);					// debugging function
 			printf(terminal_message);
-		  Send_to_IOT(terminal_message);		// TRY THIS
+		  Send_to_IOT(terminal_message);
 			for(k=ZERO; k<=Q_SIZE; k++){
 				terminal_message[k] = ZERO;
 			}	
