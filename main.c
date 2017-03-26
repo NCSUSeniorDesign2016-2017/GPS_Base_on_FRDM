@@ -98,6 +98,7 @@ while (TRUE) {
 			 }
 			 RxQ.Data[i] = ZERO;			//empty que
 		 } //Send_String(input_message);					// debugging function
+		 Send_to_IOT(input_message);	// look here
 		 Q_Init(&RxQ);
 		 GPS_message_received = FALSE;
 		 copy_message = FALSE;
